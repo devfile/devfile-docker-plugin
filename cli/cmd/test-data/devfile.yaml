@@ -1,0 +1,9 @@
+schemaVersion: 2.0.0
+metadata:
+  name: golang
+components:
+  - name: foo
+    container:
+      image: golang
+      mountSources: true
+      command: ['sleep', '600']
