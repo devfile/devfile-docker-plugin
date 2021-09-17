@@ -23,6 +23,7 @@ func main() {
 		down := cmd.DownCommand(lazyInit)
 		exec := cmd.ExecCommand(lazyInit)
 		describe := cmd.DescribeCommand(lazyInit)
+		detect := cmd.DetectCommand()
 
 		mainCmd := &cobra.Command{
 			Use:   "devenv",
@@ -40,7 +41,7 @@ func main() {
 		flags.StringVar(&devfilePath, "devfile", "devfile.yaml", "The devfile path")
 		flags.StringVar(&format, "output", "json", "The output format (e.g. json, text).")
 
-		mainCmd.AddCommand(up, down, exec, describe)
+		mainCmd.AddCommand(up, down, exec, describe, detect)
 		return mainCmd
 	},
 		manager.Metadata{

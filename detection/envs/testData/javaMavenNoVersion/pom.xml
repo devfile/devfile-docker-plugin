@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>we.are.no.strangers.to.love</groupId>
+  <artifactId>you-know-the-rules-and-so-do-i</artifactId>
+  <version>2.4.5</version>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.4.5</version>
+  </parent>
+  <name>RickAstley</name>
+
+  <properties>
+    <!-- Generic properties -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+    <!-- Web dependencies -->
+    <webjars-bootstrap.version>3.3.6</webjars-bootstrap.version>
+    <webjars-jquery-ui.version>1.11.4</webjars-jquery-ui.version>
+    <webjars-jquery.version>2.2.4</webjars-jquery.version>
+    <wro4j.version>1.8.0</wro4j.version>
+
+    <jacoco.version>0.8.5</jacoco.version>
+    <nohttp-checkstyle.version>0.0.4.RELEASE</nohttp-checkstyle.version>
+    <spring-format.version>0.0.25</spring-format.version>
+  </properties>
+
+
+</project>

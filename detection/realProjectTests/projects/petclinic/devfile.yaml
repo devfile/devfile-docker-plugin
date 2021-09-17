@@ -1,0 +1,14 @@
+components:
+  - container:
+      image: maven:3.8-jdk-8
+      memoryLimit: 3Gb
+    name: maven
+  - container:
+      image: mysql
+      memoryLimit: 3Gb
+    name: mysql
+metadata:
+  name: petclinic
+  tags:
+    - devrunner-generated
+schemaVersion: 2.1.0

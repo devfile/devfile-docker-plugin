@@ -10,9 +10,14 @@ require (
 	github.com/docker/cli v20.10.7+incompatible
 	github.com/docker/compose/v2 v2.0.0-rc.3
 	github.com/fatih/color v1.9.0 // indirect
+	github.com/go-git/go-git/v5 v5.4.2
+	github.com/magiconair/properties v1.8.5
 	github.com/onsi/ginkgo v1.14.2 // indirect
+	github.com/sirupsen/logrus v1.8.1
 	github.com/spf13/cobra v1.2.1
+	golang.org/x/mod v0.5.0
 	k8s.io/apiextensions-apiserver v0.20.1 // indirect
+	sigs.k8s.io/yaml v1.2.0
 )
 
 replace (
