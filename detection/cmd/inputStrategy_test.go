@@ -3,6 +3,7 @@ package cmd
 import (
 	"github.com/devfile/devrunner/detection/util"
 	"os"
+	"path/filepath"
 	"strings"
 	"testing"
 )
@@ -28,9 +29,16 @@ func TestGetInputStrategy(t *testing.T) {
 }
 
 func TestGitInputStrategy(t *testing.T) {
-	t.Skip("Skip")
-	path, err := GitInputStrategy{}.GetPath(util.GetTestDataPath("gitRepo"))
-
+	gitRepoPath := util.GetTestDataPath("testRepo")
+	err := os.Rename(filepath.Join(gitRepoPath, ".git_escaped"), filepath.Join(gitRepoPath, ".git"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	path, err := GitInputStrategy{}.GetPath(gitRepoPath)
+	if err != nil {
+		t.Fatal(err)
+	}
+	err = os.Rename(filepath.Join(gitRepoPath, ".git"), filepath.Join(gitRepoPath, ".git_escaped"))
 	if err != nil {
 		t.Fatal(err)
 	}
