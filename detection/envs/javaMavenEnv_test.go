@@ -1,8 +1,8 @@
 package envs
 
 import (
-	"github.com/devfile/devrunner/detection/devfileUtils"
-	"github.com/devfile/devrunner/detection/util"
+	"devrunner/devfileUtils"
+	"devrunner/util"
 	"github.com/devfile/library/pkg/devfile/parser/data/v2/common"
 	"testing"
 )
@@ -10,7 +10,7 @@ import (
 func TestJavaMavenEnv(t *testing.T) {
 	javaMavenEnv := javaMavenEnv{}
 
-	err := javaMavenEnv.TryRespond(util.GetTestDataPath("javaMavenCorrect"), GoModGoldFile)
+	_, err := javaMavenEnv.TryRespond(util.GetTestDataPath("javaMavenCorrect"), GoModGoldFile)
 	if err != nil {
 		t.Error(err)
 		return
@@ -48,7 +48,7 @@ func TestJavaMavenEnv(t *testing.T) {
 func TestMavenNoVersion(t *testing.T) {
 	env := javaMavenEnv{}
 
-	err := env.TryRespond(util.GetTestDataPath("javaMavenNoVersion"), GoModGoldFile)
+	_, err := env.TryRespond(util.GetTestDataPath("javaMavenNoVersion"), GoModGoldFile)
 	if err == nil {
 		t.Error("Did not return an error")
 	}
@@ -57,7 +57,7 @@ func TestMavenNoVersion(t *testing.T) {
 func TestMavenEmptyProject(t *testing.T) {
 	env := javaMavenEnv{}
 
-	err := env.TryRespond(util.GetTestDataPath("emptyProject"), GoModGoldFile)
+	_, err := env.TryRespond(util.GetTestDataPath("emptyProject"), GoModGoldFile)
 	if err == nil {
 		t.Error("Did not return an error")
 	}

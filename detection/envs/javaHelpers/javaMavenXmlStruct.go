@@ -29,4 +29,8 @@ type MavenProject struct {
 			Optional string `xml:"optional"`
 		} `xml:"dependency"`
 	} `xml:"dependencies"`
+	Modules struct {
+		Text   string   `xml:",chardata"`
+		Module []string `xml:"module"`
+	} `xml:"modules"`
 }

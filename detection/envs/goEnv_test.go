@@ -1,8 +1,8 @@
 package envs
 
 import (
-	"github.com/devfile/devrunner/detection/devfileUtils"
-	"github.com/devfile/devrunner/detection/util"
+	"devrunner/devfileUtils"
+	"devrunner/util"
 	"github.com/devfile/library/pkg/devfile/parser/data/v2/common"
 	"testing"
 )
@@ -14,7 +14,7 @@ const (
 func TestGoEnvCorrect(t *testing.T) {
 	goEnv := goEnv{}
 
-	err := goEnv.TryRespond(util.GetTestDataPath("goEnvCorrect"), GoModGoldFile)
+	_, err := goEnv.TryRespond(util.GetTestDataPath("goEnvCorrect"), GoModGoldFile)
 	if err != nil {
 		t.Error(err)
 		return
@@ -52,7 +52,7 @@ func TestGoEnvCorrect(t *testing.T) {
 func TestGoBadGoMod(t *testing.T) {
 	goEnv := goEnv{}
 
-	err := goEnv.TryRespond(util.GetTestDataPath("goEnvBadGoMod"), GoModGoldFile)
+	_, err := goEnv.TryRespond(util.GetTestDataPath("goEnvBadGoMod"), GoModGoldFile)
 	if err == nil {
 		t.Error("Did not return an error")
 	}
@@ -61,7 +61,7 @@ func TestGoBadGoMod(t *testing.T) {
 func TestGoEmptyGoMod(t *testing.T) {
 	goEnv := goEnv{}
 
-	err := goEnv.TryRespond(util.GetTestDataPath("goEnvEmptyGoMod"), GoModGoldFile)
+	_, err := goEnv.TryRespond(util.GetTestDataPath("goEnvEmptyGoMod"), GoModGoldFile)
 	if err == nil {
 		t.Error("Did not return an error")
 	}
@@ -70,7 +70,7 @@ func TestGoEmptyGoMod(t *testing.T) {
 func TestGoEmptyProject(t *testing.T) {
 	env := goEnv{}
 
-	err := env.TryRespond(util.GetTestDataPath("emptyProject"), GoModGoldFile)
+	_, err := env.TryRespond(util.GetTestDataPath("emptyProject"), GoModGoldFile)
 	if err == nil {
 		t.Error("Did not return an error")
 	}

@@ -17,7 +17,7 @@ const (
 package main
 
 import (
-	"devrunner/realProjectTests/lib"
+	"github.com/devfile/devrunner/detection/realProjectTests/lib"
 	"os"
 	"path/filepath"
 	"strings"
@@ -49,8 +49,8 @@ func Test%sProject(t *testing.T)  { lib.BaseTest(projectsDir, "%s", t) }
 
 func main() {
 	baseDevRunnerDir, err := os.Getwd()
-	generatedTestFullPath := filepath.Join(baseDevRunnerDir, lib.TestsDir, lib.GeneratedTestsFile)
-	projectsFullPath := filepath.Join(baseDevRunnerDir, lib.TestsDir, lib.ProjectsDir)
+	generatedTestFullPath := filepath.Join(baseDevRunnerDir, lib.TopLevelDir, lib.TestsDir, lib.GeneratedTestsFile)
+	projectsFullPath := filepath.Join(baseDevRunnerDir, lib.TopLevelDir, lib.TestsDir, lib.ProjectsDir)
 
 	if err != nil {
 		println(err.Error())

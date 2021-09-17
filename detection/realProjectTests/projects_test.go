@@ -28,4 +28,10 @@ func init() {
 	}
 }
 
+func TestFlaskExampleAppProject(t *testing.T) { lib.BaseTest(projectsDir, "flaskExampleApp", t) }
+
 func TestPetclinicProject(t *testing.T) { lib.BaseTest(projectsDir, "petclinic", t) }
+
+func TestPetclinicMultimoduleProject(t *testing.T) {
+	lib.BaseTest(projectsDir, "petclinicMultimodule", t)
+}

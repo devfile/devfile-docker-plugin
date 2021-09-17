@@ -18,8 +18,8 @@ func (*kitchenSinkImageEnv) Name() string {
 }
 
 // TryRespond for kitchenSinkImageEnv won't be called.
-func (*kitchenSinkImageEnv) TryRespond(rootPath string, additionalParams ...interface{}) error {
-	return nil
+func (*kitchenSinkImageEnv) TryRespond(rootPath string, additionalParams ...interface{}) ([]processPathPair, error) {
+	return nil, nil
 }
 
 func (*kitchenSinkImageEnv) Build(devfile data.DevfileData) error {

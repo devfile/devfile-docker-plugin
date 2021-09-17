@@ -27,7 +27,7 @@ func (*goEnv) Name() string {
 	return "Go"
 }
 
-func (this *goEnv) TryRespond(rootPath string, additionalParams ...interface{}) error {
+func (this *goEnv) TryRespond(rootPath string, additionalParams ...interface{}) ([]processPathPair, error) {
 	// Override go.mod file name
 	goModCurrentFileName := GoModFileName
 	if len(additionalParams) == 1 {
@@ -39,24 +39,24 @@ func (this *goEnv) TryRespond(rootPath string, additionalParams ...interface{}) 
 	goModFilePath := filepath.Join(rootPath, goModCurrentFileName)
 	goModFile, err := ioutil.ReadFile(goModFilePath)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	lax, err := modfile.ParseLax(goModFilePath, goModFile, nil)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	if lax.Go == nil {
-		return errors.New("got nil for lax.Go")
+		return nil, errors.New("got nil for lax.Go")
 	}
 
 	this.goVersion = lax.Go.Version
 
 	if this.goVersion == "" {
-		return errors.New("got empty string for go version")
+		return nil, errors.New("got empty string for go version")
 	}
 
-	return nil
+	return nil, nil
 }
 
 func (this *goEnv) Build(devfile data.DevfileData) error {

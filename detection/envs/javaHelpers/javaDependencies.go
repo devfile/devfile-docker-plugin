@@ -1,7 +1,12 @@
 package javaHelpers
 
+type JavaDependenciesPair struct {
+	//Path string
+	Name string
+}
+
 type JavaDependencies struct {
-	Dependencies []string
+	Dependencies []JavaDependenciesPair
 }
 
 type JavaEnvWithDependencies interface {

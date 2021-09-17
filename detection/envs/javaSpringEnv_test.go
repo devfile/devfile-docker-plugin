@@ -1,10 +1,10 @@
 package envs
 
 import (
-	"github.com/devfile/devrunner/detection/devfileUtils"
-	"github.com/devfile/devrunner/detection/envs/additionalComponents"
-	"github.com/devfile/devrunner/detection/envs/javaHelpers"
-	"github.com/devfile/devrunner/detection/util"
+	"devrunner/devfileUtils"
+	"devrunner/envs/additionalComponents"
+	"devrunner/envs/javaHelpers"
+	"devrunner/util"
 	"github.com/devfile/library/pkg/devfile/parser/data/v2/common"
 	"testing"
 )
@@ -19,15 +19,17 @@ func (this testJavaEnv) GetDependencies() javaHelpers.JavaDependencies {
 
 var correctTestJavaEnv = testJavaEnv{
 	Dependencies: javaHelpers.JavaDependencies{
-		Dependencies: []string{
-			SpringFrameworkBoot,
+		Dependencies: []javaHelpers.JavaDependenciesPair{
+			{
+				Name: SpringFrameworkBoot,
+			},
 		},
 	},
 }
 
 func TestJavaSpringEnvDependencyResolverGood(t *testing.T) {
 	springEnv := javaSpringEnv{}
-	err := springEnv.TryRespond("", correctTestJavaEnv)
+	_, err := springEnv.TryRespond("", correctTestJavaEnv)
 	if err == NoSpringError {
 		t.Errorf("expected %s, got %s", NoSpringError.Error(), err.Error())
 	}
@@ -36,14 +38,16 @@ func TestJavaSpringEnvDependencyResolverGood(t *testing.T) {
 func TestJavaSpringEnvDependencyResolverBad(t *testing.T) {
 	testJavaEnv := testJavaEnv{
 		Dependencies: javaHelpers.JavaDependencies{
-			Dependencies: []string{
-				"NeverGonnaGiveYouUp",
+			Dependencies: []javaHelpers.JavaDependenciesPair{
+				{
+					Name: "NeverGonnaGiveYouUp",
+				},
 			},
 		},
 	}
 
 	springEnv := javaSpringEnv{}
-	err := springEnv.TryRespond("", testJavaEnv)
+	_, err := springEnv.TryRespond("", testJavaEnv)
 	if err != NoSpringError {
 		t.Errorf("expected %s, got %s", NoSpringError.Error(), err.Error())
 	}
@@ -51,7 +55,7 @@ func TestJavaSpringEnvDependencyResolverBad(t *testing.T) {
 
 func TestJavaSpringEnvCorrect(t *testing.T) {
 	springEnv := javaSpringEnv{}
-	err := springEnv.TryRespond(util.GetTestDataPath("javaSpringWithMySql"), correctTestJavaEnv)
+	_, err := springEnv.TryRespond(util.GetTestDataPath("javaSpringWithMySql"), correctTestJavaEnv)
 	if err != nil {
 		t.Error(err)
 	}

@@ -33,38 +33,38 @@ func (*javaSpringEnv) Name() string {
 	return "Java (Spring)"
 }
 
-func (this *javaSpringEnv) TryRespond(rootPath string, additionalParams ...interface{}) error {
+func (this *javaSpringEnv) TryRespond(rootPath string, additionalParams ...interface{}) ([]processPathPair, error) {
 	if len(additionalParams) == 0 {
-		return errors.New("not enough params")
+		return nil, errors.New("not enough params")
 	}
 
 	parentEnv, isOk := additionalParams[0].(javaHelpers.JavaEnvWithDependencies)
 	if !isOk {
-		return errors.New("not type JavaEnvWithDependencies")
+		return nil, errors.New("not type JavaEnvWithDependencies")
 	}
 
 	hasSpring := false
 	for _, dep := range parentEnv.GetDependencies().Dependencies {
-		if dep == SpringFrameworkBoot {
+		if dep.Name == SpringFrameworkBoot {
 			hasSpring = true
 			break
 		}
 	}
 
 	if !hasSpring {
-		return NoSpringError
+		return nil, NoSpringError
 	}
 
 	folder, err := this.findResourcesFolder(rootPath)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	this.hasMySql = false
 
 	matches, err := filepath.Glob(filepath.Join(folder, PropertiesMask))
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	for _, propertyFile := range matches {
@@ -79,7 +79,7 @@ func (this *javaSpringEnv) TryRespond(rootPath string, additionalParams ...inter
 		}
 	}
 
-	return nil
+	return nil, nil
 }
 
 func (this *javaSpringEnv) Build(devfile data.DevfileData) error {
