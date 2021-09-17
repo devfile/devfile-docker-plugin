@@ -11,13 +11,19 @@ The binary can be used as a Docker CLI plugin.
 Requires at least go `1.16` because of transitive dependencies (e.g. Docker libraries)
 
 ```sh
-go build -ldflags="-s -w" -o docker-devenv devrunner.go
+go build -ldflags="-s -w" -o docker-devenv main.go
 ```
 
 ## Running
 
 ```sh
 ./devrunner --help
+```
+
+## Testing
+
+```sh
+go test ./...
 ```
 
 ### Installing as a Docker CLI plugin
@@ -27,9 +33,8 @@ mkdir -p ~/.docker/cli-plugins
 cp docker-devenv ~/.docker/cli-plugins
 ```
 
-## TODO
+## Roadmap
 
-* proper error handling and tests
 * implement all other devfile spec
   * ✅ Docker image
   * ❌ Dockerfile
@@ -41,10 +46,10 @@ cp docker-devenv ~/.docker/cli-plugins
   * ❌ command execution
   * ❌ devfile events
 * support other definition formats (e.g. convert to Devfile):
-  * `gitpod.yml`
-  * `devcontainer.json`
+  * ❌ `gitpod.yml`
+  * ❌ `devcontainer.json`
 * infer suitable definition based on the type of source code (e.g. node if it has `package.json`)
-  * ❌ Java Maven
+  * ✅ Java Maven
 * implement lifecycle operations:
   * ✅ start
   * ✅ stop
