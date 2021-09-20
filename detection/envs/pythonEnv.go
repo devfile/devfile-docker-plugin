@@ -61,7 +61,6 @@ func (this *pythonEnv) Build(devfile data.DevfileData) error {
 		{
 			Name: "python",
 			ComponentUnion: v1alpha2.ComponentUnion{
-				ComponentType: v1alpha2.ContainerComponentType,
 				Container: &v1alpha2.ContainerComponent{
 					Container: v1alpha2.Container{
 						Image:       this.getImageName(),

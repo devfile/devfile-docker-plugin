@@ -1,8 +1,8 @@
 package envs
 
 import (
-	"devrunner/devfileUtils"
-	"devrunner/util"
+	"github.com/devfile/devrunner/detection/devfileUtils"
+	"github.com/devfile/devrunner/detection/util"
 	"github.com/devfile/library/pkg/devfile/parser/data/v2/common"
 	"testing"
 )

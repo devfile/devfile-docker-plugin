@@ -1,0 +1,9 @@
+components:
+  - container:
+      image: python:3.7-slim
+      memoryLimit: 3Gb
+    name: python
+metadata:
+  tags:
+    - devrunner-generated
+schemaVersion: 2.1.0

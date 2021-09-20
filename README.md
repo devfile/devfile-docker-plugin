@@ -50,6 +50,8 @@ cp docker-devenv ~/.docker/cli-plugins
   * ❌ `devcontainer.json`
 * infer suitable definition based on the type of source code (e.g. node if it has `package.json`)
   * ✅ Java Maven
+  * ✅ Go
+  * ✅ Python
 * implement lifecycle operations:
   * ✅ start
   * ✅ stop

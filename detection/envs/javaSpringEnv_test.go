@@ -1,10 +1,10 @@
 package envs
 
 import (
-	"devrunner/devfileUtils"
-	"devrunner/envs/additionalComponents"
-	"devrunner/envs/javaHelpers"
-	"devrunner/util"
+	"github.com/devfile/devrunner/detection/devfileUtils"
+	"github.com/devfile/devrunner/detection/envs/additionalComponents"
+	"github.com/devfile/devrunner/detection/envs/javaHelpers"
+	"github.com/devfile/devrunner/detection/util"
 	"github.com/devfile/library/pkg/devfile/parser/data/v2/common"
 	"testing"
 )
