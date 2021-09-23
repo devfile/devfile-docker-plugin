@@ -1,8 +1,6 @@
 package cmd
 
 import (
-	"fmt"
-
 	"github.com/spf13/cobra"
 )
 
@@ -15,7 +13,7 @@ func createTestDevEnvCMD(subCmd *cobra.Command, testDevFile string) *cobra.Comma
 	devfilePath := ""
 	format := ""
 	flags := mainCmd.PersistentFlags()
-	flags.StringVar(&devfilePath, "devfile", fmt.Sprintf("test-data/%s", testDevFile), "The devfile path")
+	flags.StringVar(&devfilePath, "devfile", testDevFile, "The devfile path")
 	flags.StringVar(&format, "output", "json", "The output format (e.g. json, text).")
 
 	mainCmd.AddCommand(subCmd)

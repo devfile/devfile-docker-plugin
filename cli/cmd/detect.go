@@ -21,7 +21,7 @@ func DetectCommand() *cobra.Command {
 	opts := detectOps{}
 
 	detectCmd := &cobra.Command{
-		Use: "detect",
+		Use:   "detect",
 		Short: "Analyze the source code and generates an appropriate devfile",
 		Run: func(cmd *cobra.Command, args []string) {
 			err := validateStringArg("type", opts.pathType, []string{cmd2.DirTypeFlag, cmd2.GitTypeFlag})

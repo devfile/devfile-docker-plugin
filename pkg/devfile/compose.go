@@ -39,6 +39,11 @@ func ToComposeProject(devfile parser.DevfileObj) (types.Project, error) {
 func convertToService(devContainer v1alpha2.Component) types.ServiceConfig {
 	cnt := devContainer.Container
 
+	// TODO: tmp to make devfile from registry to work
+	if cnt.Command == nil {
+		cnt.Command = []string{"sleep", "infinity"}
+	}
+
 	svc := types.ServiceConfig{
 		Name:        devContainer.Name,
 		Entrypoint:  cnt.Command,

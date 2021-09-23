@@ -1,14 +1,23 @@
 package cmd
 
 import (
+	"path/filepath"
+	"strings"
+
 	"github.com/compose-spec/compose-go/types"
+	"github.com/devfile/api/v2/pkg/validation/variables"
 	"github.com/devfile/library/pkg/devfile"
 	"github.com/devfile/library/pkg/devfile/parser"
+	devfileContext "github.com/devfile/library/pkg/devfile/parser/context"
 	"github.com/devfile/library/pkg/devfile/parser/data/v2/common"
 	"github.com/spf13/cobra"
 
 	convert "github.com/devfile/devrunner/pkg/devfile"
 	"github.com/docker/compose/v2/pkg/api"
+)
+
+const (
+	devfileRegistryDomain = "https://registry.devfile.io/devfiles"
 )
 
 type upOps struct {
@@ -18,22 +27,56 @@ type upOps struct {
 	workingDir  string
 }
 
+type DevfileWriteToFSFunc func(*parser.DevfileObj) error
+type DevfileParserFunc func(parser.ParserArgs) (d parser.DevfileObj, varWarning variables.VariableWarning, err error)
+
 func UpCommand(backend api.Service) *cobra.Command {
+	return upCommand(backend, func(d *parser.DevfileObj) error {
+		return d.WriteYamlDevfile()
+	}, func(parserArgs parser.ParserArgs) (d parser.DevfileObj, varWarning variables.VariableWarning, err error) {
+		return devfile.ParseDevfileAndValidate(parserArgs)
+	})
+}
+
+func upCommand(backend api.Service, devfileWriteToFSFunc DevfileWriteToFSFunc, devfileParserFunc DevfileParserFunc) *cobra.Command {
 	opts := upOps{}
 
 	upCmd := &cobra.Command{
 		Use:   "up",
 		Short: "Create and start dev environment",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			devFilepath, err := cmd.Flags().GetString("devfile")
+			devFilePath, err := cmd.Flags().GetString("devfile")
 			if err != nil {
 				return err
 			}
-			devFile, _, err := devfile.ParseDevfileAndValidate(parser.ParserArgs{
-				Path: devFilepath,
-			})
+
+			parserArgs := parser.ParserArgs{}
+			if strings.HasPrefix(devFilePath, devfileRegistryDomain) {
+				parserArgs.URL = devFilePath
+			} else {
+				parserArgs.Path = devFilePath
+			}
+
+			devFile, _, err := devfileParserFunc(parserArgs)
 			if err != nil {
 				return err
+			}
+
+			if strings.HasPrefix(devFilePath, devfileRegistryDomain) {
+				devFileCtx := devfileContext.NewDevfileCtx(filepath.Join(opts.workingDir, "devfile.yaml"))
+				err = devFileCtx.SetAbsPath()
+				if err != nil {
+					return err
+				}
+				d := &parser.DevfileObj{
+					Ctx:  devFileCtx,
+					Data: devFile.Data,
+				}
+
+				err = devfileWriteToFSFunc(d)
+				if err != nil {
+					return err
+				}
 			}
 
 			project, err := convert.ToComposeProject(devFile)

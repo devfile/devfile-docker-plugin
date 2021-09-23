@@ -178,6 +178,19 @@ func Test_convertToService(t *testing.T) {
 				want: svc,
 			}
 		}(),
+		func() testCase {
+			cnt := sampleContainer("cnt1", "ubuntu")
+			cnt.Container.Command = nil
+			svc := sampleService("cnt1", "ubuntu")
+			svc.Entrypoint = []string{"sleep", "infinity"}
+			return testCase{
+				name: "add [`sleep`, `infinity`] if devfile component has no command",
+				args: args{
+					devContainer: cnt,
+				},
+				want: svc,
+			}
+		}(),
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
