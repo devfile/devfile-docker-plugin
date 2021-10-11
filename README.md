@@ -1,7 +1,7 @@
 
 # Intro
 
-This package contains a WIP runner for [Devfiles](https://docs.devfile.io/) to be used in MDE.
+This package contains a WIP runner for [Devfiles](https://docs.devfile.io/).
 
 It takes as input a Devfile, converts it to a Compose project and executes it using a Docker daemon.
 The binary can be used as a Docker CLI plugin.
