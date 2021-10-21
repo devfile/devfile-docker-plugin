@@ -91,7 +91,7 @@ func runExec(ctx context.Context, backend api.Service, project *types.Project, o
 		execOpts.Stdout = con
 		execOpts.Stderr = con
 	}
-	exitCode, err := backend.Exec(ctx, project, execOpts)
+	exitCode, err := backend.Exec(ctx, project.Name, execOpts)
 	if exitCode != 0 {
 		errMsg := ""
 		if err != nil {

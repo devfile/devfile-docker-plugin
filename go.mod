@@ -3,12 +3,12 @@ module github.com/devfile/devrunner
 go 1.16
 
 require (
-	github.com/compose-spec/compose-go v0.0.0-20210901090333-feb401cda7f7
+	github.com/compose-spec/compose-go v1.0.3
 	github.com/containerd/console v1.0.2
 	github.com/devfile/api/v2 v2.0.0-20210420202853-ff3c01bf8292
 	github.com/devfile/library v1.0.0-alpha.3
 	github.com/docker/cli v20.10.7+incompatible
-	github.com/docker/compose/v2 v2.0.0-rc.3
+	github.com/docker/compose/v2 v2.0.2-0.20211021124251-d38a315798c7
 	github.com/fatih/color v1.9.0 // indirect
 	github.com/go-git/go-git/v5 v5.4.2
 	github.com/magiconair/properties v1.8.5
