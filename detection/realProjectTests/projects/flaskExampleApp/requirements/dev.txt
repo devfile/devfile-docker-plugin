@@ -7,3 +7,4 @@ WebTest
 factory-boy
 # For python 3
 Faker
+waitress>=2.1.1 # not directly required, pinned by Snyk to avoid a vulnerability
